@@ -27,9 +27,8 @@ html(lang="en")
     script.
       $(function () {
         var socket = io();
-        $(".removeButton").on("click", function(){
+        $("#items").on("click", ".removeButton", function(){
           socket.emit("delete", $(this).parent().attr("id"));
-          console.log("deleted!");
         });
         $("form").submit(function(e) {
           e.preventDefault(); // prevents page reloading
