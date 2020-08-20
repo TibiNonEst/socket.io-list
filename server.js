@@ -35,14 +35,6 @@ app.get("/", function (req, res) {
   res.render("index",{items:JSON.parse(fs.readFileSync('items.json'))});
 });
 
-app.get("/login", function (req, res) {
-  res.render("login");
-});
-
-app.get("/floating-labels.css", function (req, res) {
-  res.sendFile(`${__dirname}/floating-labels.css`);
-});
-
 var server = http.listen(process.env.PORT || 2021, function () {
   var host = server.address().address;
   var port = server.address().port;
