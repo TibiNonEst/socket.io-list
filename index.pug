@@ -15,8 +15,8 @@ html(lang="en")
   body.p-3.mx-auto(style="max-width:900px")
     ul.list-group.list-group-flush#items
       each val, index in items
-        li.list-group-item.list-group-item-action.d-flex.justify-content-between.align-items-center(id=index)
-          | #{val}
+        li.list-group-item.list-group-item-action.d-flex.align-items-center(id=index)
+          span.flex-grow-1 #{val}
           a.ml-3.removeButton(href="#")
             i.fas.fa-times.fa-lg
     form
@@ -37,7 +37,7 @@ html(lang="en")
           return false;
         });
         socket.on("new", function(item) {
-          $("#items").append($(`<li id="${item[0]}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">${item[1]}<a class="ml-3 removeButton" href="#"><i class="fas fa-times fa-lg"></a></li>`));
+          $("#items").append($(`<li id="${item[0]}" class="list-group-item list-group-item-action d-flex align-items-center"><span class="flex-grow-1">${item[1]}</span><a class="ml-3 removeButton" href="#"><i class="fas fa-times fa-lg"></i></a></li>`));
         });
         socket.on("delete", function(id) {
           $("#"+id).remove();
