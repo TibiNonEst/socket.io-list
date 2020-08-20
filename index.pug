@@ -1,0 +1,46 @@
+doctype html
+html(lang="en")
+  head
+    title Socket.io List
+    meta(charset="utf-8")
+    meta(name="viewport",content="width=device-width,initial-scale=1.0")
+    meta(name="author",content="Tobey Vorus")
+    link(href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap",rel="stylesheet")
+    link(rel="stylesheet",href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css",integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=",crossorigin="anonymous")
+    link(rel="stylesheet",href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css",integrity="sha256-Ww++W3rXBfapN8SZitAvc9jw2Xb+Ixt0rvDsmWmQyTo=",crossorigin="anonymous")
+    script(src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js",integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=",crossorigin="anonymous")
+    script(src="https://cdn.jsdelivr.net/npm/socket.io-client@2.3.0/dist/socket.io.js",integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo=",crossorigin="anonymous")
+    link(rel="icon",type="image/ico",sizes="300x300",href="https://cdn.nexzcore.com/thecluster.xyz/images/favicon.ico")
+    link(rel="apple-touch-icon-precomposed",href="https://cdn.nexzcore.com/thecluster.xyz/images/favicon.ico")
+  body.p-3
+    ul.list-group.list-group-flush#items
+      each val, index in items
+        li.list-group-item.list-group-item-action.d-flex.justify-content-between.align-items-center(id=index)
+          | #{val}
+          a.ml-3.removeButton(href="#")
+            i.fas.fa-times.fa-lg
+    form
+      div.input-group
+        input.form-control#newItem(type="text")
+        div.input-group-append
+          button.btn.btn-outline-primary(type="submit") Add item
+    script.
+      $(function () {
+        var socket = io();
+        $(".removeButton").on("click", function(){
+          socket.emit("delete", $(this).parent().attr("id"));
+          console.log("deleted!");
+        });
+        $("form").submit(function(e) {
+          e.preventDefault(); // prevents page reloading
+          socket.emit("new", $("#newItem").val());
+          $("#newItem").val("");
+          return false;
+        });
+        socket.on("new", function(item) {
+          $("#items").append($(`<li id="${item[0]}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">${item[1]}<a class="ml-3 removeButton" href="#"><i class="fas fa-times fa-lg"></a></li>`));
+        });
+        socket.on("delete", function(id) {
+          $("#"+id).remove();
+        });
+      });

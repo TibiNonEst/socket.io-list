@@ -1,0 +1,23 @@
+doctype html
+html.h-100(lang="en")
+  head
+    link(rel="stylesheet",href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css",integrity="sha256-Ww++W3rXBfapN8SZitAvc9jw2Xb+Ixt0rvDsmWmQyTo=",crossorigin="anonymous")
+    link(rel="stylesheet",href="floating-labels.css")
+  body.h-100.py-5.d-flex.flex-align-center
+    form.form-signin.w-100.m-auto.px-3
+      div.text-center.mb-4
+        h1.h3.mb-5.font-weight-normal Login
+
+      div.form-label-group.position-relative.mb-3
+        input.form-control#inputEmail(type="email",placeholder="Email address",required="",autofocus="")
+        label(for="inputEmail") Email address
+
+      div.form-label-group.position-relative.mb-3
+        input.form-control#inputPassword(type="password",placeholder="Password",required="")
+        label(for="inputPassword") Password
+
+      div.checkbox.mb-3
+        label
+          input(type="checkbox",value="remember-me")
+          | &nbsp;Remember me
+      button.btn.btn-lg.btn-primary.btn-block(type="submit") Sign in
