@@ -12,7 +12,7 @@ html(lang="en")
     script(src="https://cdn.jsdelivr.net/npm/socket.io-client@2.3.0/dist/socket.io.js",integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo=",crossorigin="anonymous")
     link(rel="icon",type="image/ico",sizes="300x300",href="https://cdn.nexzcore.com/thecluster.xyz/images/favicon.ico")
     link(rel="apple-touch-icon-precomposed",href="https://cdn.nexzcore.com/thecluster.xyz/images/favicon.ico")
-  body.p-3
+  body.p-3.mx-auto(style="max-width:900px")
     ul.list-group.list-group-flush#items
       each val, index in items
         li.list-group-item.list-group-item-action.d-flex.justify-content-between.align-items-center(id=index)
