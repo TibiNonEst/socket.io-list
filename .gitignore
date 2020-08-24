@@ -108,6 +108,3 @@ dist
 
 # Package Lock
 package-lock.json
-
-login.pug
-floating-labels.css
