@@ -1,8 +1,8 @@
-var express = require("express");
-var fs = require("fs");
-var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+const express = require("express");
+const fs = require("fs");
+const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
 app.set("view engine", "pug");
 app.set("views","./");
@@ -17,16 +17,16 @@ app.use(function(req, res, next) {
 
 io.on('connection', (socket) => {
   socket.on('new', (item) => {
-    var temp = JSON.parse(fs.readFileSync('items.json'));
+    let temp = JSON.parse(fs.readFileSync('items.json'));
     temp.push(item);
     id = temp.indexOf(item);
-    fs.writeFileSync('items.json', JSON.stringify(temp,null,4));
+    fs.writeFileSync('items.json', JSON.stringify(temp, null, 2));
     io.emit('new', [id,item]);
   });
   socket.on('delete', (id) => {
-    var temp = JSON.parse(fs.readFileSync('items.json'));
-    temp.splice(id,1);
-    fs.writeFileSync('items.json', JSON.stringify(temp,null,4));
+    let temp = JSON.parse(fs.readFileSync('items.json'));
+    temp.splice(id, 1);
+    fs.writeFileSync('items.json', JSON.stringify(temp, null, 2));
     io.emit('delete', id);
   });
 });
@@ -35,8 +35,8 @@ app.get("/", function (req, res) {
   res.render("index",{items:JSON.parse(fs.readFileSync('items.json'))});
 });
 
-var server = http.listen(process.env.PORT || 2021, function () {
-  var host = server.address().address;
-  var port = server.address().port;
+const server = http.listen(process.env.PORT || 2021, function () {
+  const host = server.address().address;
+  const port = server.address().port;
   console.log("Server running at http://%s:%s", host, port);
 });

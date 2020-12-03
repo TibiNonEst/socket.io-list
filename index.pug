@@ -25,8 +25,8 @@ html(lang="en")
         div.input-group-append
           button.btn.btn-outline-primary(type="submit") Add item
     script.
+      const socket = io();
       $(function () {
-        var socket = io();
         $("#items").on("click", ".removeButton", function(){
           socket.emit("delete", $(this).parent().attr("id"));
         });
